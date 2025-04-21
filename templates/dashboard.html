@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user_name }}</h2>
+
+<h3>Your Reservations:</h3>
+{% if reservations %}
+    {% for reservation in reservations %}
+        <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            <p><strong>Gear:</strong> {{ reservation['title'] }}</p>
+            <p><strong>Reserved From:</strong> {{ reservation['reservation_date'] }}</p>
+            <p><strong>Return By:</strong> {{ reservation['return_due_date'] }}</p>
+            <p><strong>Status:</strong> {{ reservation['status'] }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>You have no reservations yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Send Message</h2>
+
+<form method="post" action="{{ url_for('send_message', receiver_id=receiver_id) }}">
+    <textarea name="content" placeholder="Type your message here..." required></textarea><br><br>
+    <button type="submit">Send Message</button>
+</form>
+
+{% endblock %}

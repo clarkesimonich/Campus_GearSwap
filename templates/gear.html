@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Available Gear Listings</h2>
+
+<!-- ✅ Search Form -->
+<form method="get" action="{{ url_for('gear') }}" style="margin-bottom: 20px;">
+    <input type="text" name="search" placeholder="Search by gear title..." value="{{ request.args.get('search', '') }}" style="padding: 5px; width: 250px;">
+    <button type="submit" style="padding: 5px 10px;">Search</button>
+</form>
+
+<a href="{{ url_for('add_gear') }}">Add New Gear</a>
+
+{% for item in gear %}
+    <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+        <h3>{{ item['title'] }}</h3>
+        <p><strong>Category:</strong> {{ item['category'] }}</p>
+        <p><strong>Condition:</strong> {{ item['condition'] }}</p>
+        <p><strong>Availability:</strong> {{ item['availability'] }}</p>
+        <p>{{ item['description'] }}</p>
+        <p><em>Posted on {{ item['date_posted'] }}</em></p>
+
+        {% if session.get('user_id') == item['user_id'] %}
+            <!-- Show Edit/Delete if the user owns the gear -->
+            <a href="{{ url_for('edit_gear', gear_id=item['gear_id']) }}">Edit</a> |
+            <form method="post" action="{{ url_for('delete_gear', gear_id=item['gear_id']) }}" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this gear?');">Delete</button>
+            </form>
+        {% elif session.get('user_id') %}
+            <!-- Show Reserve and Message Owner if the user does NOT own the gear -->
+            <a href="{{ url_for('reserve_gear', gear_id=item['gear_id']) }}">Reserve</a> |
+            <a href="{{ url_for('send_message', receiver_id=item['user_id']) }}">Message Owner</a> |
+            <a href="{{ url_for('rate_user', reviewed_id=item['user_id']) }}">Leave a Review</a>
+        {% endif %}
+    </div>
+{% else %}
+    <p>No gear listed yet. Be the first to add!</p>
+{% endfor %}
+{% endblock %}
+
+
+
+

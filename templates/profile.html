@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="text-align: center;">
+    <h2>Your Profile</h2>
+
+    <!-- ✅ Display Average Rating -->
+    {% if avg_rating %}
+        <p><strong>Average Rating:</strong> {{ "%.1f"|format(avg_rating) }} / 5</p>
+    {% else %}
+        <p><strong>Average Rating:</strong> No ratings yet.</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('profile') }}" style="max-width: 400px; margin: 20px auto 0 auto;">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ user['name'] }}" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{ user['email'] }}" readonly style="background-color: #eee;"><br><br>
+
+        <label for="password">New Password:</label><br>
+        <input type="password" id="password" name="password" placeholder="Leave blank to keep current"><br><br>
+
+        <input type="submit" value="Update Profile">
+    </form>
+</div>
+{% endblock %}
+

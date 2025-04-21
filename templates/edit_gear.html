@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Gear Listing</h2>
+
+<form method="post" action="{{ url_for('edit_gear', gear_id=gear['gear_id']) }}">
+    <input type="text" name="title" value="{{ gear['title'] }}" required><br><br>
+    <textarea name="description" required>{{ gear['description'] }}</textarea><br><br>
+    <input type="text" name="category" value="{{ gear['category'] }}" required><br><br>
+    <input type="text" name="condition" value="{{ gear['condition'] }}" required><br><br>
+    <input type="text" name="availability" value="{{ gear['availability'] }}" required><br><br>
+    <button type="submit">Update Gear</button>
+</form>
+{% endblock %}

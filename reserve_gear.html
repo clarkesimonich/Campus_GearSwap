@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Reserve Gear: {{ gear['title'] }}</h2>
+
+<form method="post" action="{{ url_for('reserve_gear', gear_id=gear['gear_id']) }}">
+    <label for="reservation_date">Reservation Date:</label><br>
+    <input type="date" name="reservation_date" required><br><br>
+
+    <label for="return_due_date">Return Due Date:</label><br>
+    <input type="date" name="return_due_date" required><br><br>
+
+    <button type="submit">Reserve Gear</button>
+</form>
+{% endblock %}

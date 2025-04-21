@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="text-align: center;">
+
+    <h2>{{ message }}</h2>
+    <p>Browse gear from students around campus — save money and resources!</p>
+
+    <!-- School supplies image -->
+    <img src="{{ url_for('static', filename='images/school_supplies.png') }}" 
+         alt="School Supplies" 
+         style="width:300px; margin: 15px; border-radius: 10px;">
+
+    <!-- Student biking image -->
+    <img src="{{ url_for('static', filename='images/bike_campus.png') }}" 
+         alt="Student Biking" 
+         style="width:300px; margin: 15px; border-radius: 10px;">
+
+</div>
+{% endblock %}
